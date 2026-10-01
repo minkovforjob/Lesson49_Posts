@@ -1,0 +1,8 @@
+{
+    "liveServer.settings.port": 5504,
+    "editor.suggest.snippetsPreventQuickSuggestions": true,
+    "terminal.integrated.suggest.quickSuggestions": {
+        "commands": "on",
+        "arguments": "on"
+    }
+}
