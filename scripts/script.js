@@ -13,9 +13,10 @@ const postConteiner = document.querySelector("#root");
 const prevPostBtn = document.querySelector(".left");
 const nextPostBtn = document.querySelector(".right");
 const BASE_URL = "https://jsonplaceholder.typicode.com";
-//localStorage.setItem("tasks", JSON.stringify(tasks));
-let postNumber = JSON.parse(localStorage.getItem("PostNumber")) || 1;
-// let postNumber = 1;
+//localStorage.setItem("PostNumber", JSON.stringify(tasks));
+// let postNumber = JSON.parse(localStorage.getItem("PostNumber")) || 1;
+// let postNumber = localStorage.getItem("PostNumber") || 1;
+let postNumber = 1;
 
 const getPostById = async () => {
     try {
@@ -57,12 +58,59 @@ const loadPost = async () => {
 loadPost();
 
 prevPostBtn.addEventListener("click", () => {
-    postNumber--;
-    loadPost();
+    prevPostBtn.disabled = true;
+    postConteiner.textContent = 'Loading...';
+    if (postNumber > 1) {
+        postNumber--;
+        loadPost();
+        localStorage.setItem("PostNumber", postNumber);
+    }
+    setTimeout(() => { prevPostBtn.disabled = false; }, 350);
+
+
+    // postConteiner.textContent = 'Loading...';
+    // // console.log(postNumber);
+    // if (postNumber <= 1) {
+    //     prevPostBtn.disabled = true;
+    //     // console.log("prevPostBtn if true");
+    // }
+    // else {
+    //     nextPostBtn.disabled = false;
+    //     prevPostBtn.disabled = false;
+    //     // console.log("prevPostBtn if false");
+    //     postNumber--;
+    //     loadPost();
+    //     localStorage.setItem("PostNumber", postNumber);
+    // }
+
 });
+
+
 nextPostBtn.addEventListener("click", () => {
-    postNumber++;
-    loadPost();
+    nextPostBtn.disabled = true;
+    postConteiner.textContent = 'Loading...';
+    if (postNumber < 100) {
+        postNumber++;
+        loadPost();
+        localStorage.setItem("PostNumber", postNumber);
+    }
+    setTimeout(() => { nextPostBtn.disabled = false; }, 350);
+
+    // postConteiner.textContent = 'Loading...';
+    // // console.log(postNumber);
+    // if (postNumber >= 100) {
+    //     nextPostBtn.disabled = true;
+    //     // console.log("nextPostBtn if true");
+    // }
+    // else {
+    //     nextPostBtn.disabled = false;
+    //     prevPostBtn.disabled = false;
+    //     // console.log("nextPostBtn if false");
+    //     postNumber++;
+    //     loadPost();
+    //     localStorage.setItem("PostNumber", postNumber);
+    // }
+
 });
 
 
