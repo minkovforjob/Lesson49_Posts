@@ -15,8 +15,8 @@ const nextPostBtn = document.querySelector(".right");
 const BASE_URL = "https://jsonplaceholder.typicode.com";
 //localStorage.setItem("PostNumber", JSON.stringify(tasks));
 // let postNumber = JSON.parse(localStorage.getItem("PostNumber")) || 1;
-// let postNumber = localStorage.getItem("PostNumber") || 1;
-let postNumber = 1;
+let postNumber = localStorage.getItem("PostNumber") || 1;
+// let postNumber = 1;
 
 const getPostById = async () => {
     try {
@@ -51,6 +51,7 @@ const renderPost = (post) => {
 // renderPost({ id: 1, title: "hello", body: "sfdkjhdskjfhks" });
 // ????? доделать renderPost(getPostById(1));
 const loadPost = async () => {
+    postConteiner.textContent = 'Loading...';
     const postData = await getPostById();
     renderPost(postData);
 }
@@ -59,7 +60,6 @@ loadPost();
 
 prevPostBtn.addEventListener("click", () => {
     prevPostBtn.disabled = true;
-    postConteiner.textContent = 'Loading...';
     if (postNumber > 1) {
         postNumber--;
         loadPost();
@@ -68,7 +68,7 @@ prevPostBtn.addEventListener("click", () => {
     setTimeout(() => { prevPostBtn.disabled = false; }, 350);
 
 
-    // postConteiner.textContent = 'Loading...';
+
     // // console.log(postNumber);
     // if (postNumber <= 1) {
     //     prevPostBtn.disabled = true;
@@ -88,7 +88,6 @@ prevPostBtn.addEventListener("click", () => {
 
 nextPostBtn.addEventListener("click", () => {
     nextPostBtn.disabled = true;
-    postConteiner.textContent = 'Loading...';
     if (postNumber < 100) {
         postNumber++;
         loadPost();
@@ -96,7 +95,7 @@ nextPostBtn.addEventListener("click", () => {
     }
     setTimeout(() => { nextPostBtn.disabled = false; }, 350);
 
-    // postConteiner.textContent = 'Loading...';
+
     // // console.log(postNumber);
     // if (postNumber >= 100) {
     //     nextPostBtn.disabled = true;
